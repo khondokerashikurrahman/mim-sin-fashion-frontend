@@ -1,0 +1,174 @@
+<main class="product-list-page">
+  <section class="product-list-hero">
+    <div class="product-list-hero-content">
+      <span class="product-eyebrow">THE MIM SIN COLLECTION</span>
+      <h1>{{ pageTitle }}</h1>
+      <p>{{ pageDescription }}</p>
+      <div class="product-breadcrumb">
+        <a routerLink="/">Home</a>
+        <span>/</span>
+        <span>Shop</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="product-list-section">
+    <div class="product-list-heading">
+      <div>
+        <span class="product-eyebrow">CURATED FOR YOU</span>
+        <h2>Explore Our Collection</h2>
+      </div>
+      <span class="product-total">{{ filteredProducts.length }} Products</span>
+    </div>
+
+    <div class="product-toolbar">
+      <div class="product-search">
+        <span aria-hidden="true">⌕</span>
+        <input
+          #searchInput
+          type="search"
+          placeholder="Search products..."
+          [value]="searchTerm"
+          (input)="onSearch(searchInput.value)"
+          aria-label="Search products"
+        />
+      </div>
+
+      <div class="product-toolbar-actions">
+        <button
+          type="button"
+          class="clear-filter-button"
+          (click)="clearFilters()"
+        >
+          Clear filters
+        </button>
+
+        <label class="sort-control">
+          <span>Sort by</span>
+          <select
+            [value]="sortBy"
+            (change)="onSortChange($any($event.target).value)"
+            aria-label="Sort products"
+          >
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="product-list-layout">
+      <aside class="product-filter-sidebar">
+        <div class="filter-heading">
+          <h3>Filters</h3>
+          <button type="button" (click)="clearFilters()">Reset</button>
+        </div>
+
+        <div class="filter-group">
+          <h4>Our Brands</h4>
+          <label class="filter-option">
+            <input
+              type="radio"
+              name="brand"
+              [checked]="selectedBrand === ''"
+              (change)="setBrand('')"
+            />
+            <span>All Brands</span>
+          </label>
+
+          @for (brand of brands; track brand.slug) {
+            <label class="filter-option">
+              <input
+                type="radio"
+                name="brand"
+                [value]="brand.slug"
+                [checked]="selectedBrand === brand.slug"
+                (change)="setBrand(brand.slug)"
+              />
+              <span>{{ brand.name }}</span>
+            </label>
+          }
+        </div>
+
+        <div class="filter-divider"></div>
+
+        <div class="filter-group">
+          <h4>Categories</h4>
+          @for (category of categories; track category) {
+            <label class="filter-option">
+              <input
+                type="checkbox"
+                [checked]="selectedCategory === category"
+                (change)="setCategory(category)"
+              />
+              <span>{{ category }}</span>
+            </label>
+          }
+        </div>
+
+        <div class="filter-note">
+          <span>✦</span>
+          <p>Thoughtfully selected styles for every occasion.</p>
+        </div>
+      </aside>
+
+      <div class="product-results">
+        @if (filteredProducts.length > 0) {
+          <div class="product-grid">
+            @for (product of filteredProducts; track product.id) {
+              <article class="product-card">
+                <a
+                  class="product-card-image"
+                  [routerLink]="['/products', product.id]"
+                  [attr.aria-label]="'View ' + product.name"
+                >
+                  <img
+                    [src]="product.image"
+                    [alt]="product.name"
+                    loading="lazy"
+                  />
+
+                  @if (product.badge) {
+                    <span class="product-badge">{{ product.badge }}</span>
+                  }
+                </a>
+
+                <div class="product-card-info">
+                  <span class="product-card-brand">{{ product.brandName }}</span>
+                  <h3>
+                    <a [routerLink]="['/products', product.id]">
+                      {{ product.name }}
+                    </a>
+                  </h3>
+
+                  <div class="product-rating">
+                    <span aria-hidden="true">★</span>
+                    <span>{{ product.rating }}</span>
+                  </div>
+
+                  <div class="product-price">
+                    <strong>৳{{ product.price | number }}</strong>
+                    @if (product.oldPrice) {
+                      <del>৳{{ product.oldPrice | number }}</del>
+                    }
+                  </div>
+                </div>
+              </article>
+            }
+          </div>
+        } @else {
+          <div class="product-empty-state">
+            <span class="empty-icon">⌕</span>
+            <h3>No products found</h3>
+            <p>We couldn't find products matching your selected filters.</p>
+            <button type="button" (click)="clearFilters()">
+              Explore All Products
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+</main>

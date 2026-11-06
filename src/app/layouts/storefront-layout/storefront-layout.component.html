@@ -1,0 +1,172 @@
+<div class="announcement">
+  <p>THE NEW COLLECTION IS HERE <span>—</span> DISCOVER YOUR STYLE</p>
+</div>
+
+<header class="site-header">
+  <div class="header-main">
+    <button class="mobile-menu" type="button"
+      [attr.aria-expanded]="menuOpen"
+      aria-label="Toggle navigation menu"
+      (click)="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a class="wordmark" routerLink="/" aria-label="Mim Sin home">
+      <span class="wordmark-main">MIM SIN</span>
+      <span class="wordmark-sub">FASHION HOUSE</span>
+    </a>
+
+    <div class="header-actions">
+      <a routerLink="/search" class="action-link" aria-label="Search">
+        <span class="action-icon">⌕</span>
+        <span class="action-label">Search</span>
+      </a>
+      <a routerLink="/account/profile" class="action-link" aria-label="My account">
+        <span class="action-icon">♙</span>
+        <span class="action-label">Account</span>
+      </a>
+      <a routerLink="/cart" class="action-link cart-link" aria-label="Shopping bag">
+        <span class="action-icon">♧</span>
+        <span class="action-label">Bag</span>
+        <span class="cart-count">0</span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="main-nav" [class.mobile-open]="menuOpen" aria-label="Main navigation">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMobileMenu()">HOME</a>
+    <a routerLink="/brands" routerLinkActive="active" (click)="closeMobileMenu()">OUR BRANDS</a>
+
+    <a routerLink="/products" [queryParams]="{ nav: 'new-arrivals' }"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'exact', fragment: 'ignored', matrixParams: 'ignored' }"
+       (click)="closeMobileMenu()">NEW ARRIVALS</a>
+
+    <details class="nav-dropdown">
+      <summary>WOMEN </summary>
+      <div class="mega-menu">
+        <div class="mega-column">
+          <h3>Clothing</h3>
+          <a routerLink="/products" [queryParams]="{ nav: 'women', category: 'Dresses' }">Dresses</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'women', category: 'Three Piece' }">Three Piece</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'women', category: 'Kurti' }">Kurtis</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'women', category: 'Co-ord Set' }">Co-ord Sets</a>
+        </div>
+        <div class="mega-column">
+          <h3>Traditional & Modest</h3>
+          <a routerLink="/products" [queryParams]="{ nav: 'women', category: 'Saree' }">Saree</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'modest-wear', category: 'Borka' }">Borka</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'modest-wear', category: 'Abaya' }">Abaya</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'modest-wear', category: 'Hijab' }">Hijab</a>
+        </div>
+        <div class="mega-column">
+          <h3>Explore</h3>
+          <a routerLink="/products" [queryParams]="{ nav: 'women' }">All Women's Products</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'new-arrivals', gender: 'WOMEN' }">New Arrivals</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="nav-dropdown">
+      <summary>MEN </summary>
+      <div class="mega-menu">
+        <div class="mega-column">
+          <h3>Clothing</h3>
+          <a routerLink="/products" [queryParams]="{ nav: 'men', category: 'Shirt' }">Shirts</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'men', category: 'T-Shirt' }">T-Shirts</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'men', category: 'Polo Shirt' }">Polo Shirts</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'men', category: 'Trousers' }">Trousers</a>
+        </div>
+        <div class="mega-column">
+          <h3>Explore</h3>
+          <a routerLink="/products" [queryParams]="{ nav: 'men' }">All Men's Products</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'new-arrivals', gender: 'MEN' }">New Arrivals</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="nav-dropdown">
+      <summary>KIDS </summary>
+      <div class="mega-menu">
+        <div class="mega-column">
+          <h3>Shop by Category</h3>
+          <a routerLink="/products" [queryParams]="{ nav: 'kids', category: 'Boys' }">Boys</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'kids', category: 'Girls' }">Girls</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'kids', category: 'Baby' }">Baby Collection</a>
+        </div>
+        <div class="mega-column">
+          <h3>Explore</h3>
+          <a routerLink="/products" [queryParams]="{ nav: 'kids' }">All Kids' Products</a>
+        </div>
+      </div>
+    </details>
+
+    <a routerLink="/products" [queryParams]="{ nav: 'modest-wear' }"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'exact', fragment: 'ignored', matrixParams: 'ignored' }"
+       (click)="closeMobileMenu()">MODEST WEAR</a>
+
+    <details class="nav-dropdown">
+      <summary>COLLECTIONS </summary>
+      <div class="mega-menu">
+        <div class="mega-column">
+          <h3>Discover Collections</h3>
+          <a routerLink="/products" [queryParams]="{ nav: 'collections', collection: 'new-season' }">New Season</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'collections', collection: 'eid' }">Eid Collection</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'collections', collection: 'summer' }">Summer Collection</a>
+          <a routerLink="/products" [queryParams]="{ nav: 'collections', collection: 'essentials' }">Essentials</a>
+        </div>
+        <div class="mega-column">
+          <h3>All Collections</h3>
+          <a routerLink="/products" [queryParams]="{ nav: 'collections' }">Explore All Collections</a>
+        </div>
+      </div>
+    </details>
+
+    <a routerLink="/products" [queryParams]="{ nav: 'all' }"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'exact', fragment: 'ignored', matrixParams: 'ignored' }"
+       (click)="closeMobileMenu()">ALL PRODUCTS</a>
+  </nav>
+</header>
+
+<main class="storefront-content">
+  <router-outlet />
+</main>
+
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a class="wordmark footer-wordmark" routerLink="/">
+        <span class="wordmark-main">MIM SIN</span>
+        <span class="wordmark-sub">FASHION HOUSE</span>
+      </a>
+      <p>Style that speaks. Elegance that lasts.</p>
+    </div>
+
+    <div class="footer-column">
+      <h3>EXPLORE</h3>
+      <a routerLink="/brands">Our Brands</a>
+      <a routerLink="/products">All Products</a>
+      <a routerLink="/products">New Arrivals</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>CUSTOMER CARE</h3>
+      <a routerLink="/account/orders">My Orders</a>
+      <a routerLink="/account/profile">My Account</a>
+      <a routerLink="/cart">Shopping Bag</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>GET IN TOUCH</h3>
+      <p>Bangladesh</p>
+      <p>Follow us on social media</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 MIM SIN. ALL RIGHTS RESERVED.</span>
+    <span>MADE WITH STYLE IN BANGLADESH</span>
+  </div>
+</footer>

@@ -1,0 +1,97 @@
+@if (brand; as page) {
+  <main class="brand-details-page" [ngClass]="page.theme">
+
+    <section class="brand-detail-hero">
+      <div class="brand-detail-hero-image" [style.background-image]="'url(' + page.heroImage + ')'"></div>
+      <div class="brand-detail-hero-shade"></div>
+
+      <div class="brand-detail-hero-content">
+        <a routerLink="/brands" class="brand-back-link">← ALL BRANDS</a>
+        <span class="brand-detail-eyebrow">{{ page.eyebrow }}</span>
+        <h1 [innerHTML]="page.title"></h1>
+        <span class="brand-detail-subtitle">{{ page.subtitle }}</span>
+        <p>{{ page.description }}</p>
+        <a routerLink="/products" [queryParams]="{ brand: page.slug }" class="brand-primary-button">
+          {{ page.cta }} <span>↗</span>
+        </a>
+      </div>
+
+      <div class="brand-hero-side-label">{{ page.name }} — EST. 2026</div>
+      <div class="brand-hero-scroll">SCROLL TO DISCOVER <span>↓</span></div>
+    </section>
+
+    <section class="brand-category-strip">
+      <span class="brand-category-heading">EXPLORE THE EDIT</span>
+      <nav aria-label="Brand categories">
+        @for (category of page.categories; track category) {
+          <a routerLink="/products" [queryParams]="{ brand: page.slug, category: category }">
+            {{ category }} <span>↗</span>
+          </a>
+        }
+      </nav>
+    </section>
+
+    <section class="brand-collection-section">
+      <div class="brand-section-heading">
+        <div>
+          <span class="brand-section-eyebrow">CURATED FOR YOU</span>
+          <h2>Discover the <em>collections.</em></h2>
+        </div>
+        <p>Thoughtfully selected pieces, made to become part of your story.</p>
+      </div>
+
+      <div class="brand-collection-grid">
+        @for (collection of page.collections; track collection.name; let i = $index) {
+          <a
+            class="brand-collection-card"
+            routerLink="/products"
+            [queryParams]="{ brand: page.slug, collection: collection.name }"
+          >
+            <div class="brand-collection-image">
+              <img [src]="collection.image" [alt]="collection.name" loading="lazy">
+              <span class="brand-collection-number">{{ collection.label }}</span>
+              <span class="brand-collection-arrow">↗</span>
+            </div>
+            <div class="brand-collection-info">
+              <div>
+                <h3>{{ collection.name }}</h3>
+                <p>{{ collection.description }}</p>
+              </div>
+              <span class="brand-collection-index">0{{ i + 1 }}</span>
+            </div>
+          </a>
+        }
+      </div>
+    </section>
+
+    <section class="brand-story-section">
+      <div class="brand-story-image">
+        <img [src]="page.storyImage" [alt]="page.name + ' editorial story'" loading="lazy">
+        <span class="brand-story-image-caption">THE MIM SIN EXPERIENCE</span>
+      </div>
+      <div class="brand-story-content">
+        <span class="brand-section-eyebrow">A LITTLE ABOUT US</span>
+        <h2>{{ page.storyTitle }}</h2>
+        <p>{{ page.storyDescription }}</p>
+        <a routerLink="/products" [queryParams]="{ brand: page.slug }" class="brand-text-link">
+          EXPLORE OUR WORLD <span>↗</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="brand-final-cta">
+      <span class="brand-section-eyebrow">YOUR NEXT FAVOURITE STARTS HERE</span>
+      <h2>Find something <em>that feels like you.</em></h2>
+      <a routerLink="/products" [queryParams]="{ brand: page.slug }" class="brand-primary-button">
+        SHOP THE COLLECTION <span>↗</span>
+      </a>
+    </section>
+
+  </main>
+} @else {
+  <main class="brand-not-found">
+    <span class="brand-section-eyebrow">COLLECTION NOT FOUND</span>
+    <h1>This world is waiting to be discovered.</h1>
+    <a routerLink="/brands" class="brand-primary-button">BACK TO ALL BRANDS ↗</a>
+  </main>
+}
